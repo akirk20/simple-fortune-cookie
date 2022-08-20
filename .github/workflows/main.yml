@@ -28,12 +28,23 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_UN }}
           password: ${{ secrets.DOCKERHUB_PW }}
-      - name: Build and push
+      # these step is for building and pushing to dockerhub
+      - name: Build and push backend
         uses: docker/build-push-action@v3
         with:
-          context: ./setup
+          context: ./backend
           push: true
           tags: user/app:latest
+      # these step is for building and pushing to dockerhub
+      - name: Build and push frontend
+        uses: docker/build-push-action@v3
+        with:
+          context: ./frontend
+          push: true
+          tags: user/app:latest
+      # this step is for running with docker-compose
+      - name: Build the stack
+        run: docker-compose up -d
   
 # example from GH which worked
   # This workflow contains a single job called "build"
