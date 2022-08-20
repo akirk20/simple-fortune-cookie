@@ -44,9 +44,10 @@ jobs:
           tags: akirk20/app:latest
       # this step is for running with docker-compose
       - name: Build the stack
+        run: docker-compose up -d
         with:
           context: ./setup
-        run: docker-compose up -d
+        
   
 # example from GH which worked
   # This workflow contains a single job called "build"
