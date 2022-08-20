@@ -34,14 +34,14 @@ jobs:
         with:
           context: ./backend
           push: true
-          tags: user/app:latest
+          tags: akirk20/app:latest
       # these step is for building and pushing to dockerhub
       - name: Build and push frontend
         uses: docker/build-push-action@v3
         with:
           context: ./frontend
           push: true
-          tags: user/app:latest
+          tags: akirk20/app:latest
       # this step is for running with docker-compose
       - name: Build the stack
         run: docker-compose up -d
