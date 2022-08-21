@@ -48,10 +48,15 @@ jobs:
           context: ./frontend
           push: true
           tags: akirk20/frontend:latest
-  
-
-
-        
+  deploy: 
+    runs-on: self-hosted
+    needs: [docker, build]
+    steps: 
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Apply manifests
+        run: |
+          kubectl apply -f ./setup
   
 # example from GH which worked
   # This workflow contains a single job called "build"
