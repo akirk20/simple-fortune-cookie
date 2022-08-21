@@ -1,6 +1,21 @@
 version: "3.9"
  
 services: 
+
+  db: 
+    image: redis
+    ports: 
+      - 6379:6379
+    environment: 
+      REDIS_DNS: localhost
+
+  backend: 
+    build: ../backend/
+    ports: 
+      - 9000:9000
+    depends_on: 
+      - db
+
   frontend:
     build: ../frontend/
     ports: 
@@ -11,16 +26,6 @@ services:
       BACKEND_DNS: localhost
       BACKEND_PORT: 9000
   
-  backend: 
-    build: ../backend/
-    ports: 
-      - 9000:9000
-    depends_on: 
-      - db
+
   
-  db: 
-    image: redis
-    ports: 
-      - 6379:6379
-    environment: 
-      REDIS_DNS: localhost
+  
