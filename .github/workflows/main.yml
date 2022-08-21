@@ -42,6 +42,13 @@ jobs:
           context: ./frontend
           push: true
           tags: akirk20/app:latest
+  
+  test:
+    runs-on: self-hosted
+    steps: 
+      - name: Run a one-line script
+        run: echo Testing tests!
+
         
   
 # example from GH which worked
