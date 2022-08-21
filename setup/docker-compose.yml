@@ -14,14 +14,15 @@ services:
     ports: 
       - 9000:9000
     depends_on: 
-      - db
+      - "db"
+    restart: always
 
   frontend:
     build: ../frontend/
     ports: 
       - 8080:8080
     depends_on: 
-      - backend 
+      - "backend" 
     environment: 
       BACKEND_DNS: localhost
       BACKEND_PORT: 9000
