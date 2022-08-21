@@ -13,9 +13,15 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  test:
+    runs-on: self-hosted
+    steps: 
+      - name: Run a one-line script
+        run: echo Testing tests!
 # docker action for build and push to DockerHub
   docker:
     runs-on: self-hosted
+    needs: [test]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -34,20 +40,16 @@ jobs:
         with:
           context: ./backend
           push: true
-          tags: akirk20/app:latest
+          tags: akirk20/backend:latest
       # these step is for building and pushing to dockerhub
       - name: Build and push frontend
         uses: docker/build-push-action@v3
         with:
           context: ./frontend
           push: true
-          tags: akirk20/app:latest
+          tags: akirk20/frontend:latest
   
-  test:
-    runs-on: self-hosted
-    steps: 
-      - name: Run a one-line script
-        run: echo Testing tests!
+
 
         
   
