@@ -3,18 +3,18 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: deployment-backend
-  name: deployment-backend
+    app: sfc-backend
+  name: sfc-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: deployment-backend
+      app: sfc-backend
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: deployment-backend
+        app: sfc-backend
     spec:
       containers:
       - name: backend
@@ -24,20 +24,20 @@ spec:
         image: akirk20/simple-fortune-cookie-backend:latest
         ports:
         - containerPort: 9000
-          name: deployment-backend
+          name: sfc-backend
           protocol: TCP
 --- 
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: deployment-backend
+  name: sfc-backend
   labels:
-    app: deployment-backend
+    app: sfc-backend
 spec:
   type: ClusterIP
   ports:
   - port: 9000
     targetPort: 9000
   selector:
-    app: deployment-backend
+    app: sfc-backend
