@@ -1,0 +1,43 @@
+apiVersion: app/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: deployment-frontend
+  name: deployment-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-frontend
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: deployment-frontend
+    spec:
+      containers:
+      - name: frontend
+        env:
+          - name: BACKEND_DNS
+            value: backend
+        image: akirk20/simple-fortune-cookie-frontend:latest
+        ports:
+        - containerPort: 8080
+          name: deployment-frontend
+          protocol: TCP
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: deployment-frontend
+  labels:
+    app: deployment-frontend
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app: deployment-frontend
