@@ -8,8 +8,8 @@ services:
     depends_on: 
       - backend 
     environment: 
-      BACKEND_DNS:localhost
-      BACKEND_PORT:9000
+      BACKEND_DNS: localhost
+      BACKEND_PORT: 9000
   
   backend: 
     build: ../backend/
@@ -23,4 +23,4 @@ services:
     ports: 
       - 6379:6379
     environment: 
-      REDIS_DNS:localhost
+      REDIS_DNS: localhost
