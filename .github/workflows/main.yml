@@ -42,14 +42,6 @@ jobs:
           context: ./frontend
           push: true
           tags: akirk20/app:latest
-      # this step is for running with docker-compose
-      - name: docker compose publish
-        uses: pennsignals/publish_docker-compose@v0.1.0
-        with:
-          version:
-          context: ./setup
-          docker_compose: 'docker-compose.yml' # required
-          repo_token: "${{ secrets.GH_TOKEN }}"
         
   
 # example from GH which worked
